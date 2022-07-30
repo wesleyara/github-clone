@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* UI & surface colors */
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #8c8c8c;
+
+  --text-primary: #242424;
+  --text-secondary: #585858;
+
+  /* Brand colors */
+  --red-violet: #aa18a3;
+}
+
+.dark,
+[data-theme="dark"] {
+  --bg-primary: #131416;
+  --bg-secondary: #1c1c1c;
+
+  --text-primary: #bebebe;
+  --text-secondary: #dedede;
+}
