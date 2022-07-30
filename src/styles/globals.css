@@ -9,10 +9,12 @@
   --bg-secondary: #8c8c8c;
 
   --text-primary: #242424;
-  --text-secondary: #585858;
+  --text-secondary: #ffffff;
 
   /* Brand colors */
-  --red-violet: #aa18a3;
+  --black-color: #24292f;
+
+  font-family: "Ubuntu", sans-serif;
 }
 
 .dark,
