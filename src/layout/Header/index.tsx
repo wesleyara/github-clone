@@ -1,10 +1,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AiFillCaretDown, AiOutlinePlus } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 import { FaGithub, FaRegBell } from "react-icons/fa";
 
+import { useUser } from "../../hooks/useUser";
+
 export const Header = () => {
-  const [searchElement, setSearchElement] = useState();
+  const { user } = useUser();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
@@ -50,13 +53,17 @@ export const Header = () => {
         </span>
 
         <span className="flex items-center gap-1">
-          <Image
-            width={20}
-            height={20}
-            alt="a user image"
-            src={`/img/user.jpeg`}
-            className={`rounded-full cursor-pointer`}
-          />
+          {user ? (
+            <Image
+              width={20}
+              height={20}
+              alt="a user image"
+              src={user.avatar_url}
+              className={`rounded-full cursor-pointer`}
+            />
+          ) : (
+            <CgProfile className="text-[20px]" />
+          )}
           <AiFillCaretDown className="text-[9px] cursor-pointer" />
         </span>
       </nav>
