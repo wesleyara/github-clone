@@ -1,7 +1,12 @@
 import "../styles/globals.css";
 import "../styles/typography.css";
+
+import "regenerator-runtime/runtime.js";
+import "react-toastify/dist/ReactToastify.css";
+
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
+import { ToastContainer } from "react-toastify";
 
 import { AuthProvider } from "../context/AuthContext";
 import { UserProvider } from "../context/UserContext";
@@ -14,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <UserProvider>
           <LayoutProvider>
             <Component {...pageProps} />
+            <ToastContainer autoClose={3000} />
           </LayoutProvider>
         </UserProvider>
       </AuthProvider>
