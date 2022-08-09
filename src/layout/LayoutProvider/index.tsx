@@ -10,9 +10,19 @@ interface LayoutProviderProps {
 }
 
 export const LayoutProvider = ({ children }: LayoutProviderProps) => {
-  const { accountname } = useAuth();
+  const { accountname, setAccountname } = useAuth();
   const { setUser } = useUser();
   const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("userName")) {
+      setAccountname(localStorage.getItem("userName")!);
+    }
+
+    if (localStorage.getItem("userData")) {
+      setUser(JSON.parse(localStorage.getItem("userData")!));
+    }
+  }, []);
 
   const getUser = async () => {
     try {
@@ -22,6 +32,8 @@ export const LayoutProvider = ({ children }: LayoutProviderProps) => {
       const data = await response.json();
 
       setUser(data);
+
+      localStorage.setItem("userData", JSON.stringify(data));
     } catch {
       console.log("Failed to fetch user");
     }

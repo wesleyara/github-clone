@@ -28,14 +28,17 @@ const Login = () => {
         setNameButton("Sign in");
         return toast.error("User not found.");
       }
+
+      localStorage.setItem("userData", JSON.stringify(data));
     } catch {
       console.log("Failed to fetch user");
       setNameButton("Sign in");
       return;
     }
 
+    localStorage.setItem("userName", username);
     setAccountname(username);
-    router.push("/");
+    router.push(`/${username}`);
   };
 
   return (
