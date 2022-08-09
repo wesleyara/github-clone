@@ -35,6 +35,7 @@
     "react/prop-types": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import-helpers/order-imports": [
       "warn",
       {
