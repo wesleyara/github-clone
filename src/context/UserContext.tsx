@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 
-import { IUser } from "../@types/user";
+import { IUser } from "../@types";
 
 interface UserProviderProps {
   children: ReactNode;
