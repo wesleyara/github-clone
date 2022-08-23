@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import { IUser } from "../../@types/user";
+import { IUser } from "../../@types";
+import { ProfileStatus, UserNavbar } from "../../components";
 import { Meta } from "../../layout/Meta";
 
 const User = () => {
@@ -49,7 +50,11 @@ const User = () => {
         title={`${tab}`}
         description="Faça login para continuar para o GitHub."
       />
-      <h1>{user}</h1>
+      {user && <UserNavbar userName={user} />}
+      <div className="flex justify-center">
+        {userData && <ProfileStatus userData={userData} />}
+        <div className="max-w-[990px] w-[990px]"></div>
+      </div>
     </>
   );
 };
