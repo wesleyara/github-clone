@@ -51,10 +51,10 @@ const Login = () => {
         <div className="flex flex-col items-center gap-6">
           <FaGithub className="text-[48px]" />
 
-          <p className=" text-[24px]">Sign in to GitHub</p>
+          <p className="text-[24px] font-thin">Sign in to GitHub</p>
         </div>
 
-        <div className="flex flex-col bg-[#F6F8FA] border-[1px] border-[#D8DEE4] h-[220px] py-5 px-4 gap-4 rounded-md">
+        <div className="flex flex-col w-full bg-[#F6F8FA] border-[1px] border-[#D8DEE4] h-[220px] py-5 px-4 gap-4 rounded-md">
           <span className="flex flex-col gap-2">
             <p className="text-[14px]">Username or email address</p>
             <input
