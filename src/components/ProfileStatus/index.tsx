@@ -35,11 +35,11 @@ export const ProfileStatus = ({ userData }: ProfileStatusProps) => {
             alt="a peoples icon"
           />
           <span>
-            <b className="font-semibold">{122}</b> followers
+            <b className="font-semibold">{userData?.followers}</b> followers
           </span>
           &#x2022;
           <span>
-            <b className="font-semibold">{122}</b> following
+            <b className="font-semibold">{userData?.following}</b> following
           </span>
         </span>
       </div>
