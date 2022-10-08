@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -15,6 +16,10 @@ const User = () => {
     try {
       const response = await fetch(`https://api.github.com/users/${user}`);
       const data = await response.json();
+
+      if (data.message) {
+        return setUserData(undefined);
+      }
 
       setUserData(data);
     } catch {
@@ -50,11 +55,19 @@ const User = () => {
         title={`${tab}`}
         description="Faça login para continuar para o GitHub."
       />
-      {user && <UserNavbar userName={user} />}
-      <div className="flex justify-center">
-        {userData && <ProfileStatus userData={userData} />}
-        <div className="max-w-[990px] w-[990px]"></div>
-      </div>
+      {userData ? (
+        <>
+          <UserNavbar userName={user} />
+          <div className="flex justify-center">
+            {userData && <ProfileStatus userData={userData} />}
+            <div className="max-w-[990px] w-[990px]"></div>
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 className="flex justify-center">404: user not found</h1>
+        </>
+      )}
     </>
   );
 };
