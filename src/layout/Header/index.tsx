@@ -5,18 +5,20 @@ import { AiFillCaretDown, AiOutlinePlus } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaGithub, FaRegBell } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
-import { useUser } from "../../hooks/useUser";
+import { IState } from "../../@types/redux";
 
 export const Header = () => {
-  const { user, setUser } = useUser();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(undefined);
-    location.reload();
-  };
+  const user = useSelector((state: IState) => state.user);
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setUser(undefined);
+  //   location.reload();
+  // };
 
   if (!user) {
     return <PleaseLogin />;
@@ -65,12 +67,12 @@ export const Header = () => {
         </span>
 
         <span className="flex items-center gap-1">
-          {user ? (
+          {user.isLogged === true ? (
             <Image
               width={20}
               height={20}
               alt="a user image"
-              src={user.avatar_url}
+              src={user.data.avatar_url}
               className={`rounded-full cursor-pointer`}
             />
           ) : (

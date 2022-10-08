@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useAuth } from "../../hooks/useAuth";
-import { useUser } from "../../hooks/useUser";
+import { IState } from "../../@types/redux";
+import { setAccount } from "../../redux/authSlice";
+import { setUser } from "../../redux/userSlice";
 import { Header } from "../Header";
 
 interface LayoutProviderProps {
@@ -10,28 +12,29 @@ interface LayoutProviderProps {
 }
 
 export const LayoutProvider = ({ children }: LayoutProviderProps) => {
-  const { accountname, setAccountname } = useAuth();
-  const { setUser } = useUser();
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const accountname = useSelector((state: IState) => state.auth);
 
   useEffect(() => {
     if (localStorage.getItem("userName")) {
-      setAccountname(localStorage.getItem("userName")!);
+      dispatch(setAccount({ name: localStorage.getItem("userName") }));
     }
 
     if (localStorage.getItem("userData")) {
-      setUser(JSON.parse(localStorage.getItem("userData")!));
+      dispatch(setUser(JSON.parse(localStorage.getItem("userData")!)));
     }
   }, []);
 
   const getUser = async () => {
     try {
       const response = await fetch(
-        `https://api.github.com/users/${accountname}`,
+        `https://api.github.com/users/${accountname.name}`,
       );
       const data = await response.json();
 
-      setUser(data);
+      dispatch(setUser(data));
 
       localStorage.setItem("userData", JSON.stringify(data));
     } catch {
@@ -40,7 +43,7 @@ export const LayoutProvider = ({ children }: LayoutProviderProps) => {
   };
 
   useEffect(() => {
-    if (accountname.length > 0) {
+    if (accountname.isLogged === true) {
       getUser();
     }
   }, [accountname]);

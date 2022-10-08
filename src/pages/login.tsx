@@ -1,16 +1,18 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-import { useAuth } from "../hooks/useAuth";
 import { Meta } from "../layout/Meta";
+import { setAccount } from "../redux/authSlice";
 
 const Login = () => {
   const router = useRouter();
-  const { setAccountname } = useAuth();
   const [username, setUsername] = useState("");
   const [nameButton, setNameButton] = useState("Sign in");
+
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     setNameButton("Signing in...");
@@ -37,7 +39,7 @@ const Login = () => {
     }
 
     localStorage.setItem("userName", username);
-    setAccountname(username);
+    dispatch(setAccount({ name: username }));
     router.push(`/${username}`);
   };
 

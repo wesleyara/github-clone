@@ -31,4 +31,5 @@ export interface IUser {
   following: number;
   created_at: string;
   updated_at: string;
+  isLogged: boolean;
 }
